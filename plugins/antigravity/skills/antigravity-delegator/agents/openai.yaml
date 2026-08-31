@@ -1,0 +1,6 @@
+interface:
+  display_name: "Antigravity Delegator"
+  short_description: "Run tracked Antigravity CLI jobs"
+  default_prompt: "Use $antigravity-delegator to delegate this bounded task through a tracked Antigravity job."
+policy:
+  allow_implicit_invocation: true

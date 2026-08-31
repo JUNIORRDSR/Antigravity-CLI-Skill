@@ -1,0 +1,24 @@
+{
+  "name": "antigravity",
+  "version": "0.2.0",
+  "description": "Delegate bounded work to persistent, traceable Antigravity CLI jobs.",
+  "author": {
+    "name": "Antigravity Delegator"
+  },
+  "keywords": ["antigravity", "delegation", "subagent", "automation"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Antigravity Delegator",
+    "shortDescription": "Run persistent Antigravity CLI jobs",
+    "longDescription": "Delegate bounded research, documentation, coding, testing, and review tasks to tracked Antigravity CLI jobs with follow-up, recovery, and model-family fallback.",
+    "developerName": "Antigravity Delegator",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "defaultPrompt": [
+      "Delegate this bounded task to Antigravity and track it to completion.",
+      "Check the latest Antigravity job and recover it if interrupted.",
+      "Run an independent Antigravity review without editing files."
+    ],
+    "brandColor": "#4285F4"
+  }
+}

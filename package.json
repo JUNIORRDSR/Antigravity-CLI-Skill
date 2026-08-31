@@ -1,0 +1,13 @@
+{
+  "name": "antigravity-delegator",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18.18.0" },
+  "scripts": {
+    "package:claude": "node scripts/package-claude.mjs",
+    "test": "node --test",
+    "test:unit": "node --test tests/args-state.test.mjs tests/ndjson-routing.test.mjs",
+    "validate": "node --test tests/package-contract.test.mjs"
+  }
+}

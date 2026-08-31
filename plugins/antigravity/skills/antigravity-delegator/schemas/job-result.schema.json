@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openai.local/antigravity-delegator/job-result.schema.json",
+  "title": "Antigravity Delegator Job Result",
+  "type": "object",
+  "required": ["schemaVersion", "jobId", "state", "agyStatus", "attempts", "response", "changedFiles", "errors"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "jobId": { "type": "string" },
+    "state": { "enum": ["queued", "starting", "running", "waiting", "retrying", "succeeded", "awaiting-approval", "failed", "canceled", "interrupted", "orphaned"] },
+    "agyStatus": { "type": ["string", "null"] },
+    "conversationId": { "type": ["string", "null"] },
+    "attempts": { "type": "array", "items": { "type": "object" } },
+    "response": { "type": ["string", "object", "array", "null"] },
+    "guidance": { "type": ["string", "null"], "description": "Operator-facing next step when the job did not produce work." },
+    "changedFiles": { "type": "array", "items": { "type": "string" } },
+    "verification": {},
+    "errors": { "type": "array" },
+    "usage": { "type": ["object", "null"] },
+    "stderr": { "type": "string" },
+    "completedAt": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "additionalProperties": true
+}

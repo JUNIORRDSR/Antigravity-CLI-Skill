@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openai.local/antigravity-delegator/audit-findings.schema.json",
+  "title": "Antigravity Audit Findings",
+  "description": "Pass to the runtime as --json-schema for read-only audits. Forcing file+line+quote on every verdict is what stops a model from returning a correct judgement anchored to an invented citation. agy treats the schema as a strong instruction, not a validator: observed output kept every required field but also added its own toolAction/toolSummary keys, so the top level stays open.",
+  "type": "object",
+  "required": ["summary", "findings"],
+  "additionalProperties": true,
+  "properties": {
+    "summary": { "type": "string", "description": "What was audited and what the reviewer concluded overall." },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "verdict", "file", "line", "quote", "reasoning"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "description": "Stable identifier for the claim under audit." },
+          "verdict": { "enum": ["resolved", "open", "not-applicable", "unverifiable"] },
+          "file": { "type": ["string", "null"], "description": "Repository-relative path actually opened. null only when verdict is unverifiable." },
+          "line": { "type": ["integer", "null"], "minimum": 1, "description": "1-indexed line the quote came from. null only when verdict is unverifiable." },
+          "quote": { "type": ["string", "null"], "description": "Verbatim source text at file:line. null only when verdict is unverifiable." },
+          "reasoning": { "type": "string" },
+          "confidence": { "enum": ["high", "medium", "low"] }
+        }
+      }
+    },
+    "notOpened": {
+      "type": "array",
+      "description": "Files the audit could not open, with the reason. An empty audit must say so here rather than reporting everything as unverifiable.",
+      "items": {
+        "type": "object",
+        "required": ["file", "reason"],
+        "additionalProperties": false,
+        "properties": { "file": { "type": "string" }, "reason": { "type": "string" } }
+      }
+    },
+    "openIssues": { "type": "array", "items": { "type": "string" } }
+  }
+}
