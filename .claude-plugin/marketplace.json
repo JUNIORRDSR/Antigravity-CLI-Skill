@@ -1,0 +1,19 @@
+{
+  "name": "antigravity-cli-skill",
+  "owner": {
+    "name": "JUNIORRDSR",
+    "url": "https://github.com/JUNIORRDSR"
+  },
+  "description": "Antigravity CLI integrations for coding agents.",
+  "plugins": [
+    {
+      "name": "antigravity",
+      "displayName": "Antigravity Delegator",
+      "source": "./plugins/antigravity",
+      "description": "Delegate bounded work to persistent, traceable Antigravity CLI jobs.",
+      "repository": "https://github.com/JUNIORRDSR/Antigravity-CLI-Skill",
+      "category": "Productivity",
+      "tags": ["delegation", "subagent", "automation"]
+    }
+  ]
+}

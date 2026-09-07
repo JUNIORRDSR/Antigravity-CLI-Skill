@@ -104,9 +104,16 @@ test("canonical skill package has a valid, complete structural contract", async 
 });
 
 test("Claude and Codex manifests expose modern lifecycle skills", async () => {
+  const marketplace = JSON.parse(await readFile(path.join(root, ".claude-plugin", "marketplace.json"), "utf8"));
   const claudeManifest = JSON.parse(await readFile(path.join(pluginRoot, ".claude-plugin", "plugin.json"), "utf8"));
+  assert.equal(marketplace.name, "antigravity-cli-skill");
+  assert.deepEqual(
+    marketplace.plugins.map(({ name, source }) => ({ name, source })),
+    [{ name: "antigravity", source: "./plugins/antigravity" }]
+  );
   assert.equal(claudeManifest.name, "antigravity");
   assert.ok(claudeManifest.description);
+  assert.equal(claudeManifest.version, undefined, "Claude updates must follow the marketplace commit");
   assert.equal(claudeManifest.skills, "./claude-skills/");
   assert.equal(claudeManifest.hooks, undefined);
   assert.equal(claudeManifest.mcpServers, undefined);
@@ -118,7 +125,6 @@ test("Claude and Codex manifests expose modern lifecycle skills", async () => {
   assert.ok(codexManifest.interface.defaultPrompt.length > 0);
 
   const packageManifest = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
-  assert.equal(claudeManifest.version, codexManifest.version);
   assert.equal(packageManifest.version, codexManifest.version);
 
   const legacyCommands = await readdir(path.join(pluginRoot, "commands")).catch((error) => {

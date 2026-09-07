@@ -1,6 +1,5 @@
 {
   "name": "antigravity",
-  "version": "0.2.0",
   "description": "Tracked delegation to Antigravity CLI from Claude Code.",
   "author": {
     "name": "Antigravity Delegator"
