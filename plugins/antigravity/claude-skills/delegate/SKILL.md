@@ -6,6 +6,8 @@ allowed-tools: Task
 ---
 
 Delegate this request to the `antigravity:antigravity-runner` agent. Its task is exactly `$ARGUMENTS`. Do not perform the requested work locally and do not add permission-bypass flags.
+ 
+The `antigravity:antigravity-runner` agent defaults to Gemini 3.8 Flash (`gemini-3.8-flash`) with high reasoning effort (`effort: high`) so delegated tasks receive deep thinking and high-quality results. Its turn limit defaults to 3 (`maxTurns: 3`), but `maxTurns` can be modified in the agent configuration to maintain an optimal, fluid execution flow on complex delegations.
 
 ## Choosing a model
 

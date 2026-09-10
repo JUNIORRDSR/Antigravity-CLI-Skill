@@ -151,12 +151,19 @@ test("Claude and Codex manifests expose modern lifecycle skills", async () => {
 
   const delegate = await readFile(path.join(pluginRoot, "claude-skills", "delegate", "SKILL.md"), "utf8");
   assert.match(delegate, /antigravity:antigravity-runner/);
+  assert.match(delegate, /gemini-3\.8-flash/);
+  assert.match(delegate, /effort:\s*high/);
+  assert.match(delegate, /`?maxTurns`? can be modified/);
 
   const agent = await readFile(path.join(pluginRoot, "agents", "antigravity-runner.md"), "utf8");
   assert.match(agent, /^---\r?\nname: antigravity-runner/m);
   assert.match(agent, /tools:\s*Bash/);
   assert.doesNotMatch(agent, /\b(Read|Edit|Write|Glob|Grep)\b/);
   assert.match(agent, /stdout unchanged/);
+  assert.match(agent, /model:\s*gemini-3\.8-flash/);
+  assert.match(agent, /effort:\s*high/);
+  assert.match(agent, /maxTurns:\s*\d+/);
+  assert.match(agent, /`?maxTurns`? can be modified/);
 });
 
 test("Claude packager puts the plugin manifest at the ZIP root", async (t) => {
@@ -226,7 +233,7 @@ test("Codex installer refuses unrelated targets and uses a link when supported",
   const link = await runInstaller(["--link", "--target", linked]);
   assert.equal(link.code, 0, link.stderr);
   const linkedStat = await lstat(linked);
-  assert.ok(linkedStat.isSymbolicLink() || (process.platform === "win32" && /Installed as a copy/.test(link.stdout)));
+  assert.ok(linkedStat.isSymbolicLink() || (process.platform === "win32" && /Installed as (?:copy|link)/.test(link.stdout)));
   assert.match(await readFile(path.join(linked, "SKILL.md"), "utf8"), /name: antigravity-delegator/);
 });
 
