@@ -106,6 +106,7 @@ test("canonical skill package has a valid, complete structural contract", async 
 test("Claude and Codex manifests expose modern lifecycle skills", async () => {
   const marketplace = JSON.parse(await readFile(path.join(root, ".claude-plugin", "marketplace.json"), "utf8"));
   const claudeManifest = JSON.parse(await readFile(path.join(pluginRoot, ".claude-plugin", "plugin.json"), "utf8"));
+  const rootClaudeManifest = JSON.parse(await readFile(path.join(root, ".claude-plugin", "plugin.json"), "utf8"));
   assert.equal(marketplace.name, "antigravity-cli-skill");
   assert.deepEqual(
     marketplace.plugins.map(({ name, source }) => ({ name, source })),
@@ -117,6 +118,10 @@ test("Claude and Codex manifests expose modern lifecycle skills", async () => {
   assert.equal(claudeManifest.skills, "./claude-skills/");
   assert.equal(claudeManifest.hooks, undefined);
   assert.equal(claudeManifest.mcpServers, undefined);
+
+  assert.equal(rootClaudeManifest.name, "antigravity");
+  assert.ok(rootClaudeManifest.description);
+  assert.equal(rootClaudeManifest.skills, "./plugins/antigravity/claude-skills/");
 
   const codexManifest = JSON.parse(await readFile(path.join(pluginRoot, ".codex-plugin", "plugin.json"), "utf8"));
   assert.equal(codexManifest.name, "antigravity");

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "antigravity",
+  "description": "Tracked delegation to Antigravity CLI from Claude Code.",
+  "author": {
+    "name": "Antigravity Delegator",
+    "url": "https://github.com/JUNIORRDSR"
+  },
+  "homepage": "https://github.com/JUNIORRDSR/Antigravity-CLI-Skill",
+  "repository": "https://github.com/JUNIORRDSR/Antigravity-CLI-Skill",
+  "skills": "./plugins/antigravity/claude-skills/",
+  "agents": ["./plugins/antigravity/agents/antigravity-runner.md"]
+}
